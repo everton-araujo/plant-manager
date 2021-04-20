@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Button } from '../components/Button/button.components';
-
 import wateringImage from '../assets/watering.png';
 
 import { 
   Container, 
   Title, 
-  Text, 
-  Image
-} from './styles';
+  Text,
+  Button,
+  Image,
+  ButtonIcon
+} from './welcome.style';
 
 export function Welcome() {
   return (
@@ -20,14 +20,22 @@ export function Welcome() {
         de forma fácil
       </Title>
 
-      <Image source={wateringImage} />
+      <Image 
+        source={wateringImage}
+        resizeMode='contain'
+      />
 
       <Text>
         Nunca mais esqueça de regar suas plantas.
-        Nós cuidamos de lembra-lo sempre que precisar.  
+        Nós cuidamos de lembra-lo sempre que precisar.
       </Text>
 
-      <Button title='>' />
+      <Button>
+        <ButtonIcon 
+          name='chevron-right' 
+          size={32} 
+        />
+      </Button>
     </Container>
   );
 }
