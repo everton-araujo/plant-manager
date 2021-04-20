@@ -1,5 +1,5 @@
 export const fonts = {
-  main: 'Jost-Regular',
-  mainSemiBold : 'Jost-SemiBold',
-  mainBold: 'Jost-Bold',
+  heading : 'Jost-SemiBold',
+  text: 'Jost-Regular',
+  bold: 'Jost-Bold',
 }

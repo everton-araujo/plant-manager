@@ -1,8 +1,8 @@
 import React from 'react';
 
-import wateringImage from '../assets/watering.png';
+import wateringImage from '../../assets/watering.png';
 
-import { 
+import {
   Container,
   Title,
   Text,
@@ -16,8 +16,8 @@ export function Welcome() {
     <Container>
       <Title>
         Gerencie {'\n'}
-        suas plantas {'\n'}
-        de forma fácil
+        suas plantas de {'\n'}
+        forma fácil
       </Title>
 
       <Image
