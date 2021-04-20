@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from '../../components/button/Button.component';
 
-import { 
+import {
   Container,
   Content,
   Emoji,
@@ -28,7 +28,9 @@ export function Confirmation() {
         </SubTitle>
 
         <Footer>
-          <Button />
+          <Button
+            title='Começar'
+          />
         </Footer>
       </Content>
     </Container>

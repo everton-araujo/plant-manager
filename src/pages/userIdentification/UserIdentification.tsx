@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Platform } from 'react-native';
+import { Alert, Keyboard, Platform, TouchableWithoutFeedback } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import { theme } from '../../infrastructure/theme';
 
@@ -22,6 +23,17 @@ export function UserIdentification() {
   const [isFilled, setIsFilled] = useState(false);
   const [name, setName] = useState<string>();
 
+  const navigation = useNavigation();
+
+  function handleSubmit() {
+    if (isFilled) {
+      navigation.navigate('Confirmation');
+      return;
+    }
+
+    Alert.alert('Preencha o nome');
+  }
+
   function handleInputBlur() {
     setIsFocused(false);
     setIsFilled(!!name);
@@ -41,36 +53,41 @@ export function UserIdentification() {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' && 'padding'}
       >
-        <Content>
-          <Form>
-            <IOSKeyboardAvoidingView>
-              <Emoji>
-                {
-                  isFilled ? '😄' : '😃'
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <Content>
+            <Form>
+              <IOSKeyboardAvoidingView>
+                <Emoji>
+                  {
+                    isFilled ? '😄' : '😃'
+                  }
+                </Emoji>
+
+                <Title>
+                  Como podemos {'\n'}
+                  chamar você?
+                </Title>
+              </IOSKeyboardAvoidingView>
+              <Input
+                style={
+                  (isFocused || isFilled) && 
+                  { borderColor: theme.colors.green }
                 }
-              </Emoji>
+                placeholder='Digite o nome'
+                onBlur={handleInputBlur}
+                onFocus={handleInputFocus}
+                onChangeText={handleInputChange}
+              />
 
-              <Title>
-                Como podemos {'\n'}
-                chamar você?
-              </Title>
-            </IOSKeyboardAvoidingView>
-            <Input
-              style={
-                (isFocused || isFilled) && 
-                { borderColor: theme.colors.green }
-              }
-              placeholder='Digite o nome'
-              onBlur={handleInputBlur}
-              onFocus={handleInputFocus}
-              onChangeText={handleInputChange}
-            />
-
-            <Footer>
-              <Button />
-            </Footer>
-          </Form>
-        </Content>
+              <Footer>
+                <Button 
+                  title='Confirmar'
+                  onPress={handleSubmit}
+                />
+              </Footer>
+            </Form>
+          </Content>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </Container>
   );

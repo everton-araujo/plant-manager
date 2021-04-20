@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 import wateringImage from '../../assets/watering.png';
 
@@ -12,6 +13,12 @@ import {
 } from './welcome.style';
 
 export function Welcome() {
+  const navigation = useNavigation();
+
+  function handleStart() {
+    navigation.navigate('UserIdentification')
+  }
+
   return (
     <Container>
       <Title>
@@ -33,7 +40,8 @@ export function Welcome() {
       <Button>
         <ButtonIcon
           name='chevron-right'
-          size={32} 
+          size={32}
+          onPress={handleStart}
         />
       </Button>
     </Container>
