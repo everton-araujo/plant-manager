@@ -13,8 +13,8 @@ export const Container = styled.SafeAreaView`
 export const Title = styled.Text`
   margin-top: ${theme.margins.large};
   font-size: ${theme.sizes.large};
-  font-weight: bold;
   text-align: center;
+  font-family: ${theme.fonts.mainSemiBold};
   color: ${theme.colors.heading};
 `;
 
@@ -22,6 +22,7 @@ export const Text = styled.Text`
   text-align: center;
   font-size: ${theme.sizes.small};
   padding-horizontal: ${theme.paddings.medium};
+  font-family: ${theme.fonts.main};
   color: ${theme.colors.heading}
 `;
 
