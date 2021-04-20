@@ -3,8 +3,8 @@ import React from 'react';
 import wateringImage from '../assets/watering.png';
 
 import { 
-  Container, 
-  Title, 
+  Container,
+  Title,
   Text,
   Button,
   Image,
@@ -20,7 +20,7 @@ export function Welcome() {
         de forma fácil
       </Title>
 
-      <Image 
+      <Image
         source={wateringImage}
         resizeMode='contain'
       />
@@ -31,8 +31,8 @@ export function Welcome() {
       </Text>
 
       <Button>
-        <ButtonIcon 
-          name='chevron-right' 
+        <ButtonIcon
+          name='chevron-right'
           size={32} 
         />
       </Button>
