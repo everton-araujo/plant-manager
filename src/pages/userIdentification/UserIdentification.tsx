@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Keyboard, Platform, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { theme } from '../../infrastructure/theme';
 
@@ -25,13 +26,15 @@ export function UserIdentification() {
 
   const navigation = useNavigation();
 
-  function handleSubmit() {
-    if (isFilled) {
-      navigation.navigate('Confirmation');
+  async function handleSubmit() {
+    if (!name) {
+      Alert.alert('Como posso te chamar? 😉');
       return;
     }
+    
+    await AsyncStorage.setItem('@plantManager:userName', name);
 
-    Alert.alert('Preencha o nome');
+    navigation.navigate('Confirmation');
   }
 
   function handleInputBlur() {
@@ -45,7 +48,7 @@ export function UserIdentification() {
 
   function handleInputChange(inputValue: string) {
     setIsFilled(!!inputValue);
-    setName(inputValue);
+    setName(inputValue.trim());
   }
 
   return (
