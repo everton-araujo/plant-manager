@@ -5,6 +5,7 @@ import api from '../../services/api';
 
 import { Header } from '../../components/header/Header.component';
 import { PlantCard } from '../../components/plant/PlantCard.component';
+import { Load } from '../../components/load/Load.component';
 
 import {
   Container,
@@ -36,9 +37,10 @@ interface PlantProps {
 
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentProps[]>();
-  const [plants, setPlants] = useState<PlantProps[]>();
-  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>();
+  const [plants, setPlants] = useState<PlantProps[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
   const [environmentSelected, setEnvironmentSelected] = useState('all');
+  const [loading, setLoading] = useState(true);
 
   function handleEnvironmentSelected(environment: string) {
     setEnvironmentSelected(environment);
@@ -74,10 +76,16 @@ export function PlantSelect() {
     async function fetchPlants() {
       const { data } = await api.get('plants?_sort=name&order=asc');
       setPlants(data);
+      setFilteredPlants(data);
+      setLoading(false);
     }
 
     fetchPlants();
   }, []);
+
+  if (loading) {
+    return <Load />
+  }
 
   return (
     <Container>
