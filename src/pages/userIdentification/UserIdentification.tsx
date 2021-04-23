@@ -32,9 +32,13 @@ export function UserIdentification() {
       return;
     }
     
-    await AsyncStorage.setItem('@plantManager:userName', name);
-
-    navigation.navigate('Confirmation');
+    try {
+      await AsyncStorage.setItem('@plantManager:userName', name);
+  
+      navigation.navigate('Confirmation');
+    } catch {
+      Alert.alert('Não foi possível salvar seu nome');
+    }
   }
 
   function handleInputBlur() {
