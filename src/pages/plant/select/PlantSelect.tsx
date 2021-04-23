@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
-import api from '../../services/api';
+import api from '../../../services/api';
 
-import { EnvironmentButton } from '../../components/enviromentButton/EnvironmentButton.component';
-import { Header } from '../../components/header/Header.component';
-import { PlantCard } from '../../components/plant/PlantCard.component';
-import { Load } from '../../components/load/Load.component';
+import { EnvironmentButton } from '../../../components/enviromentButton/EnvironmentButton.component';
+import { Header } from '../../../components/header/Header.component';
+import { PlantCard } from '../../../components/plant/PlantCard.component';
+import { Load } from '../../../components/load/Load.component';
 
-import { theme } from '../../infrastructure/theme';
+import { theme } from '../../../infrastructure/theme';
 
 import {
   Container,
@@ -25,7 +26,7 @@ interface EnvironmentProps {
   title: string;
 }
 
-interface PlantProps {
+export interface PlantProps {
   id: string;
   name: string;
   about: string;
@@ -46,7 +47,8 @@ export function PlantSelect() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [loadedAll, setLoadedAll] = useState(false);
+
+  const navigation = useNavigation();
 
   function handleEnvironmentSelected(environment: string) {
     setEnvironmentSelected(environment);
@@ -60,6 +62,10 @@ export function PlantSelect() {
     );
 
     setFilteredPlants(filtered);
+  }
+
+  function handlePlantSelect(plant: PlantProps) {
+    navigation.navigate('PlantSave', { plant });
   }
 
   async function fetchPlants() {
@@ -160,7 +166,8 @@ export function PlantSelect() {
           numColumns={2}
           renderItem={({ item }) => (
             <PlantCard 
-            data={item} 
+              data={item} 
+              onPress={() => handlePlantSelect(item)}
             />
             )}
           onEndReachedThreshold={0.1}

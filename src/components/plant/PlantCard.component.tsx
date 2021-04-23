@@ -17,7 +17,7 @@ interface PlantProps extends RectButtonProps {
 
 export const PlantCard = ({ data, ...rest}: PlantProps) => {
   return (
-    <Button>
+    <Button {...rest}>
       <SvgFromUri 
         uri={data.photo}
         width={70}
