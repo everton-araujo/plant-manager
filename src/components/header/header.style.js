@@ -9,7 +9,9 @@ export const Container = styled.SafeAreaView`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   margin-top: ${Platform.OS === 'ios' ? getStatusBarHeight() : 0}px;
 `;
 
