@@ -7,7 +7,7 @@ import { isBefore, format } from 'date-fns';
 
 import { Button } from '../../../components/button/Button.component';
 
-import { PlantProps } from '../select/PlantSelect';
+import { PlantProps } from '../../../libs/storage';
 
 import waterDrop from '../../../assets/waterdrop.png';
 
@@ -26,7 +26,7 @@ import {
 } from './PlantSave.style';
 
 interface Params {
-  plant: PlantProps
+  plant: PlantProps;
 }
 
 export function PlantSave() {

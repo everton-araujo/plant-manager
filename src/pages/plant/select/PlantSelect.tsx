@@ -3,6 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 
 import api from '../../../services/api';
+import { PlantProps } from '../../../libs/storage';
 
 import { EnvironmentButton } from '../../../components/enviromentButton/EnvironmentButton.component';
 import { Header } from '../../../components/header/Header.component';
@@ -24,19 +25,6 @@ import {
 interface EnvironmentProps {
   key: string;
   title: string;
-}
-
-export interface PlantProps {
-  id: string;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
-  frequency: {
-    times: number;
-    repeat_every: string;
-  }
 }
 
 export function PlantSelect() {
