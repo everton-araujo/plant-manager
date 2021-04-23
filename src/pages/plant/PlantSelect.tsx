@@ -132,6 +132,7 @@ export function PlantSelect() {
 
       <EnvironmentList
         data={environments}
+        keyExtractor={(item) => String(item.key)}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
@@ -154,6 +155,7 @@ export function PlantSelect() {
       <PlantListContainer>
         <PlantList 
           data={filteredPlants}
+          keyExtractor={(item) => String(item.id)}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           renderItem={({ item }) => (
