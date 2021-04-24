@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -16,6 +17,10 @@ const AuthRoutes = () => {
         activeTintColor: theme.colors.green,
         inactiveTintColor: theme.colors.heading,
         labelPosition: 'beside-icon',
+        style: {
+          paddingVertical: Platform.OS === 'ios' ? 20 : 0,
+          height: Platform.OS === 'ios' ? 80 : 50
+        }
       }}
     >
       <AppTab.Screen
