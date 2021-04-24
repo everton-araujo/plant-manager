@@ -5,25 +5,39 @@ import { RectButtonProps } from 'react-native-gesture-handler';
 
 import {
   Button,
-  Title
-} from './PlantCard.style';
+  Title,
+  Details,
+  TimeLabel,
+  Time
+} from './PlantCardDetails.style';
 
 interface PlantProps extends RectButtonProps {
   data: {
     name: string;
     photo: string;
+    hour: string;
   }
 }
 
-export const PlantCard = ({data, ...rest}: PlantProps) => {
+export const PlantCardDetails = ({data, ...rest}: PlantProps) => {
   return (
     <Button {...rest}>
       <SvgFromUri 
         uri={data.photo}
-        width={70}
-        height={70}
+        width={50}
+        height={50}
       />
       <Title>{data.name}</Title>
+
+      <Details>
+        <TimeLabel>
+          Regar às
+        </TimeLabel>
+
+        <Time>
+          {data.hour}
+        </Time>
+      </Details>
     </Button>
   );
 }

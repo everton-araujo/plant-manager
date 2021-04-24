@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Alert, Platform } from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
-import { useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 import { isBefore, format } from 'date-fns';
 
 import { Button } from '../../../components/button/Button.component';
 
-import { PlantProps, savePlant, loadPlant } from '../../../libs/storage';
+import { PlantProps, savePlant } from '../../../libs/storage';
 
 import waterDrop from '../../../assets/waterdrop.png';
 
@@ -33,7 +33,9 @@ export function PlantSave() {
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios');
 
+  const navigation = useNavigation();
   const route = useRoute();
+
   const { plant } = route.params as Params;
 
   function handleChangeTime(_: Event, dateTime: Date | undefined) {
@@ -61,6 +63,14 @@ export function PlantSave() {
       await savePlant({
         ...plant,
         dateTimeNotification: selectedDateTime
+      });
+
+      navigation.navigate('Confirmation', {
+        title: 'Tudo certo',
+        subtitle: 'Fique tranquilo que sempre iremos lembra-lo de cuidar da sua plantinha com muito cuidado.',
+        buttonTitle: 'Muito Obrigado',
+        icon: 'hug',
+        nextScreen: 'MyPlants'
       });
       
     } catch (err) {

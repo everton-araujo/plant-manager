@@ -13,7 +13,7 @@ export const Button = styled(RectButton)`
   border-radius: 20px;
 `;
 
-export const Text = styled.Text`
+export const Title = styled.Text`
   margin: 16px 0; 
   font-family: ${theme.fonts.heading};
   color: ${theme.colors.green_dark};
