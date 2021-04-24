@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
 
 import waterDrop from '../../../assets/waterdrop.png';
 
-import { PlantProps, loadPlant } from '../../../libs/storage';
+import { PlantProps, loadPlant, removePlant } from '../../../libs/storage';
 import { Header } from '../../../components/header/Header.component';
 import { Load } from '../../../components/load/Load.component';
 import { PlantCardDetails } from '../../../components/plant/PlantCardDetails.component';
@@ -24,6 +25,30 @@ export function MyPlants() {
   const [loading, setLoading] = useState(true);
   const [nextWatering, setNextWatering] = useState<string>();
 
+  function handleRemovePlantCard(plant: PlantProps) {
+    Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
+      {
+        text: 'Não 🤗',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim 😥',
+        onPress: async () => {
+          try {
+            await removePlant(plant.id);
+
+            setMyPlants((oldData) => (
+              oldData.filter((item) => item.id !== plant.id)
+            ));
+
+          } catch (err) {
+            Alert.alert('Não foi possível remover');
+          }
+        }
+      }
+    ])
+  }
+
   useEffect(() => {
     async function loadStorageDate() {
       const plantsStored = await loadPlant();
@@ -35,7 +60,7 @@ export function MyPlants() {
       );
 
       setNextWatering(
-        `Não esqueça de regar a ${plantsStored[0].name} à ${nextTime} horas.`
+        `Não esqueça de regar a ${plantsStored[0].name} em ${nextTime}.`
       );
 
       setMyPlants(plantsStored);
@@ -45,7 +70,12 @@ export function MyPlants() {
     loadStorageDate();
   }, []);
 
+  
   if (loading) {
+    if (myPlants.length === 0) {
+      setLoading(false);
+    }
+
     return <Load />
   }
 
@@ -56,7 +86,13 @@ export function MyPlants() {
       <SpotLight>
         <SpotLightImage source={waterDrop} />
 
-        <SpotLightText>{nextWatering}</SpotLightText>
+        <SpotLightText>
+          {
+            myPlants.length === 0
+              ? 'Adicione suas plantas'
+              : nextWatering
+          }
+        </SpotLightText>
       </SpotLight>
 
       <Plants>
@@ -67,7 +103,10 @@ export function MyPlants() {
           keyExtractor={(item) => String(item.id)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <PlantCardDetails data={item} />
+            <PlantCardDetails 
+              data={item}
+              handleRemovePlantCard={() => {handleRemovePlantCard(item)}}
+            />
           )}
           showVerticalScrollIndicator={false}
         />

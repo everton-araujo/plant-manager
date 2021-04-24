@@ -2,6 +2,19 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import { theme } from '../../infrastructure/theme';
 
+export const RemoveButton = styled(RectButton)`
+  width: 100px;
+  height: 85px;
+  margin-top: 12px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 20px;
+  padding-left: 15px;
+  background: ${theme.colors.red};
+`;
+
 export const Button = styled(RectButton)`
   width: 100%;
   flex-direction: row;
