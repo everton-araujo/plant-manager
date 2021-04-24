@@ -4,8 +4,10 @@ import { pt } from 'date-fns/locale';
 
 import waterDrop from '../../../assets/waterdrop.png';
 
-import { Header } from '../../../components/header/Header.component';
 import { PlantProps, loadPlant } from '../../../libs/storage';
+import { Header } from '../../../components/header/Header.component';
+import { Load } from '../../../components/load/Load.component';
+import { PlantCardDetails } from '../../../components/plant/PlantCardDetails.component';
 
 import {
   Container,
@@ -16,7 +18,6 @@ import {
   PlantText,
   PlantList
 } from './MyPlants.style';
-import { PlantCardDetails } from '../../../components/plant/PlantCardDetails.component';
 
 export function MyPlants() {
   const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
@@ -35,7 +36,7 @@ export function MyPlants() {
 
       setNextWatering(
         `Não esqueça de regar a ${plantsStored[0].name} à ${nextTime} horas.`
-      )
+      );
 
       setMyPlants(plantsStored);
       setLoading(false);
@@ -43,6 +44,10 @@ export function MyPlants() {
 
     loadStorageDate();
   }, []);
+
+  if (loading) {
+    return <Load />
+  }
 
   return (
     <Container>
