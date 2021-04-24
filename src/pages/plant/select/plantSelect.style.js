@@ -28,6 +28,7 @@ export const SubTitle = styled.Text`
 
 export const EnvironmentList = styled.FlatList`
   height: 40px;
+  margin-bottom: 20px;
 `;
 
 export const PlantListContainer = styled.View`

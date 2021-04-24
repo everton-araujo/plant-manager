@@ -58,7 +58,7 @@ export function Confirmation() {
 
         <Footer>
           <Button
-            title='Começar'
+            title={buttonTitle}
             onPress={handleMoveOn}
           />
         </Footer>

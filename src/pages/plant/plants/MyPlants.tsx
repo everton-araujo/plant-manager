@@ -60,6 +60,7 @@ export function MyPlants() {
         <PlantList
           data={myPlants}
           keyExtractor={(item) => String(item.id)}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <PlantCardDetails data={item} />
           )}
