@@ -3,7 +3,7 @@ import { Alert, Platform } from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
 import { useNavigation, useRoute } from '@react-navigation/core';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
-import { isBefore, format } from 'date-fns';
+import { format } from 'date-fns';
 
 import { Button } from '../../../components/button/Button.component';
 
@@ -42,13 +42,7 @@ export function PlantSave() {
     if (Platform.OS === 'android') {
       setShowDatePicker(oldState => !oldState);
     }
-
-    if (dateTime && isBefore(dateTime, new Date())) {
-      setSelectedDateTime(new Date());
-
-      return Alert.alert('Escolha um horário futuro');
-    }
-
+    
     if (dateTime) {
       setSelectedDateTime(dateTime);
     }
